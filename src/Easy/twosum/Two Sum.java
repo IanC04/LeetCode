@@ -12,7 +12,7 @@ class Solution {
         HashMap<Integer, Integer> map = new HashMap<>();
         int[] answer = new int[2];
         for (int i = 0; i < nums.length; i++) {
-            int other = target - nums[i]
+            int other = target - nums[i];
             if (map.containsKey(other)) {
                 answer[0] = map.get(other);
                 answer[1] = i;
