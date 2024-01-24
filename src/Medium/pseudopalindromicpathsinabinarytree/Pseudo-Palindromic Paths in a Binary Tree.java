@@ -1,14 +1,15 @@
 /**
  * @author: Ian Chen
  * @date: 1/23/2024
- * <br>
- * <a href=https://github.com/IanC04>GitHub</a>
  */
 
 package Medium.pseudopalindromicpathsinabinarytree;
 
 import java.util.*;
 
+/**
+ * <a href=https://github.com/IanC04>My GitHub</a>
+ */
 class Solution {
     public int pseudoPalindromicPaths(TreeNode root) {
         // Didn't account for values being [0, 9]
@@ -19,7 +20,7 @@ class Solution {
      * Ensure each path has all even values with one or zero odd values
      *
      * @param current current node
-     * @param odds values that have appeared odd number of times
+     * @param odds    values that have appeared odd number of times
      * @return total palindromes starting from this subtree
      */
     int pathHelper(TreeNode current, HashSet<Integer> odds) {
@@ -27,8 +28,7 @@ class Solution {
         boolean removed = odds.contains(nodeValue);
         if (removed) {
             odds.remove(nodeValue);
-        }
-        else {
+        } else {
             odds.add(nodeValue);
         }
 
@@ -36,7 +36,7 @@ class Solution {
             int total = odds.size() <= 1 ? 1 : 0;
             if (removed) {
                 odds.add(nodeValue);
-            }else {
+            } else {
                 odds.remove(nodeValue);
             }
             return total;
@@ -51,7 +51,7 @@ class Solution {
         }
         if (removed) {
             odds.add(nodeValue);
-        }else {
+        } else {
             odds.remove(nodeValue);
         }
 
