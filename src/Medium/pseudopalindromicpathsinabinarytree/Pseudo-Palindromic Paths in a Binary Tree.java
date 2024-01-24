@@ -18,9 +18,9 @@ class Solution {
     /**
      * Ensure each path has all even values with one or zero odd values
      *
-     * @param current
-     * @param odds
-     * @return
+     * @param current current node
+     * @param odds values that have appeared odd number of times
+     * @return total palindromes starting from this subtree
      */
     int pathHelper(TreeNode current, HashSet<Integer> odds) {
         int nodeValue = current.val;
