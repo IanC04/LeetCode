@@ -11,30 +11,37 @@ import java.util.*;
  * @see <a href=https://github.com/IanC04>My GitHub</a>
  */
 class Solution {
-    public int[] findMode(TreeNode root) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        int max = recur(root, map);
+    int maxCount = 0;
+    TreeNode prev = null;
+    int curCount = 0;
 
-        List<Integer> result = new ArrayList<>();
-        for (int k : map.keySet()) {
-            if (map.get(k) == max) {
-                result.add(k);
-            }
-        }
-        return result.stream().mapToInt(Integer::intValue).toArray();
+    public int[] findMode(TreeNode root) {
+        List<Integer> modes = new ArrayList<>();
+        recur(root, modes);
+
+        return modes.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    private int recur(TreeNode node, HashMap<Integer, Integer> map) {
+    private void recur(TreeNode node, List<Integer> modes) {
         if (node == null) {
-            return 0;
+            return;
         }
 
-        int lMax = recur(node.left, map);
-        int rMax = recur(node.right, map);
-        map.put(node.val, map.getOrDefault(node.val, 0) + 1);
-        int cMax = map.get(node.val);
-
-        return Math.max(Math.max(lMax, rMax), cMax);
+        recur(node.left, modes);
+        if (prev != null && node.val == prev.val) {
+            ++curCount;
+        } else {
+            curCount = 1;
+        }
+        if (curCount > maxCount) {
+            modes.clear();
+            modes.add(node.val);
+            maxCount = curCount;
+        } else if (curCount == maxCount) {
+            modes.add(node.val);
+        }
+        prev = node;
+        recur(node.right, modes);
     }
 }
 
